@@ -60,4 +60,8 @@ class User extends Authenticatable
     public function sales (){
         return $this->hasMany(Sale::class);
     }
+
+    public function favourite (){
+        return $this->hasMany(Favourite::class);
+    }
 }

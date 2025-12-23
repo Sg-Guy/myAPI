@@ -33,5 +33,9 @@ class Product extends Model
                     ->withPivot('quantity', 'ref') ;
     }
 
+    public function favourite () {
+        return $this->belongsTo(Favourite::class);
+    }
+
     
 }

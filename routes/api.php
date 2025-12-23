@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\AController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\FavouriteController;
+use App\Http\Controllers\LocalisationController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SaleController;
@@ -11,15 +15,15 @@ Route::get ('/welcome' , function (){
     return 'Welcome' ;
 } ) ;
 Route::prefix('/user')->controller(UserController::class)->group(function (){
-    Route::get('', function (Request $request) {
-        return $request->user();
+    Route::get('/', function (Request $request) {
+        return response()->json(['user'=>$request->user()] , 200);
     })->middleware('auth:sanctum');
 
-    Route::post('login', 'login')->name('routes.login') ;
+    Route::post('/login', 'login')->name('routes.login') ;
     Route::post('/register', 'register')->name('routes.register') ;
-    Route::post('logout', 'logout')->name('routes.logout')->middleware('auth:sanctum');
-    Route::get('profil', 'profil')->name('routes.profil')->middleware('auth:sanctum');
-    Route::put('update/{user}', 'update')->name('routes.update') ;
+    Route::post('/logout', 'logout')->name('routes.logout')->middleware('auth:sanctum');
+    Route::get('/profil', 'profil')->name('routes.profil')->middleware('auth:sanctum');
+    Route::put('/update', 'update')->name('routes.update')->middleware('auth:sanctum') ;
 }) ;
 
 
@@ -57,10 +61,18 @@ Route::prefix('/roles')->controller(RoleController::class)->group(function (){
     Route::put('update/{role}' , 'update')->name('roles.update') ;
 }) ;
 
-Route::prefix('/localisations')->controller(RoleController::class)->group(function (){
-    Route::get('/' , 'index')->name('index') ;
+Route::prefix('/localisations')->controller(LocalisationController::class)->group(function (){
+    Route::get('/' , 'index')->name('index')->middleware('auth:sanctum') ;
+    Route::post('store' , 'store')->name('store')->middleware('auth:sanctum') ;
+    Route::put('update/{id}' , 'update')->middleware('auth:sanctum') ;
+}) ;
+
+Route::prefix('/favourites')/*->middleware('auth:sanctum')*/->controller(FavouriteController::class)->name('favourites.')->group(function (){
+Route::get('/' , 'index')->name('index') ;
     Route::post('store' , 'store')->name('store') ;
+    Route::delete('delete/{favoris}' , 'delete')->name('delete') ;
     //Route::put('update/{localisation}' , 'update')->name('localisations.update') ;
 }) ;
+
 
 

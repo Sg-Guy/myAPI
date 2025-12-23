@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Dotenv\Validator;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use League\Config\Exception\ValidationException;
 
 class UserController extends Controller
@@ -87,7 +89,7 @@ class UserController extends Controller
     {
         if ($request->user()) {
 
-            return response()->json($request->user() , 200);
+            return response()->json([ 'user'=>$request->user()] ,200);
         } else {
             return response()->json(["message"=>"Veuillez vous connecter"] , 400);
         }
@@ -104,5 +106,30 @@ class UserController extends Controller
     }
 
 
-   public function update (){}
+/*public function update(Request $request)
+    {
+        //dd($request->user() ) ;
+        // 1. Validation (Laravel 12 gère automatiquement la réponse d'erreur en API)
+        $request->validate([
+            'name'  => 'required',
+            'email' => 
+                'required|email', 
+                  
+               // Rule::unique('users')->ignore($request->user()->email)
+            
+        ]);
+
+        dd ($request->validated) ;
+        // 2. Mise à jour de l'utilisateur authentifié
+        $request->user()->update($validated);
+
+        // 3. Réponse
+        return response()->json([
+            'status'  => 'success',
+            'message' => 'Profil mis à jour avec succès',
+            'user'    => $request->user(),
+        ]);
+    }*/
+
+    
 }

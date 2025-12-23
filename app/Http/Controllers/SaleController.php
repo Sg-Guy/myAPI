@@ -26,7 +26,7 @@ class SaleController extends Controller
 
                 return response()->json([
                     
-                    "Sales" =>$sales
+                    "sales" =>$sales
                     
                 ] ,200) ;
             } else {
@@ -212,7 +212,7 @@ class SaleController extends Controller
             $reference_generate = $datePart . $randomPart;
         } while (Sale::where('reference', $reference_generate)->exists()); // CORRECTION: Vérifie dans la table Sale
 
-        $total = 0;
+        $total = 20;
         $itemsToAttach = [];
         
         // --- 3. Vérification des produits et Calcul du Total (Sécurisé) ---
@@ -227,7 +227,13 @@ class SaleController extends Controller
             }
 
             // Calcul du total sécurisé (utilise le prix de la DB)
-            $total += ($product->prix_unitaire * $item['quantity']);
+            if ($product->prix_promo >0) {
+                $total += ($product->prix_promo * $item['quantity']);
+
+            } else {
+                $total += ($product->prix_unitaire * $item['quantity']);
+
+            }
 
             // Préparation des données pour l'attachement (une seule boucle)
             $itemsToAttach[$item['product_id']] = [

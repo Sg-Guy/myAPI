@@ -10,6 +10,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 Route::get ('/welcome' , function (){
@@ -21,7 +22,7 @@ Route::prefix('/user')->controller(UserController::class)->group(function (){
     })->middleware('auth:sanctum');
 
     Route::post('/login', 'login')->name('routes.login') ;
-    Route::post('/register', 'register')->name('routes.register') ;
+    Route::post('register', 'register')->name('routes.register') ;
     Route::post('/logout', 'logout')->name('routes.logout')->middleware('auth:sanctum');
     Route::get('/profil', 'profil')->name('routes.profil')->middleware('auth:sanctum');
     Route::put('/update', 'update')->name('routes.update')->middleware('auth:sanctum') ;
@@ -31,18 +32,17 @@ Route::prefix('/user')->controller(UserController::class)->group(function (){
 
 
 Route::apiResource('categories' , CategoryController::class) ;
-Route::get('test', [TestController::class, 'test']);
 
 
 
 
-Route::prefix('/products')->controller(ProductController::class)->group(function (){
-    Route::get('/' , 'index')->name('index') ;
-    Route::post('store' , 'store')->name('products.store') ;
-    Route::get('vedette' , 'vedette')->name('products.vedette') ;
-    Route::get('nouveau' , 'nouveau')->name('products.nouveau') ;
-    Route::put('update/{product}' , 'update')->name('products.update') ;
-    Route::delete('destroy/{product}' , 'destroy')->name('products.destroy') ;
+Route::prefix('/products')->group(function (){
+    Route::get('/' , [ProductController::class, "index"]);
+    Route::post('store' , [ProductController::class , "store"])->middleware(["auth:sanctum"]);
+    Route::get('vedette' , [ProductController::class , "vedette"]);
+    Route::get('nouveau' , [ProductController::class , "nouveau"]);
+    Route::put('update/{product}' , [ProductController::class , "update"])->middleware(["auth:sanctum"]) ;
+    Route::delete('destroy/{product}' , [ProductController::class ,"destroy"])->middleware(["auth:sanctum"]) ;
 }) ;
 
 Route::prefix('/sales')->controller(SaleController::class)->group(function (){
@@ -66,10 +66,10 @@ Route::prefix('/localisations')->controller(LocalisationController::class)->grou
     Route::put('update/{id}' , 'update')->middleware('auth:sanctum') ;
 }) ;
 
-Route::prefix('/favourites')/*->middleware('auth:sanctum')*/->controller(FavouriteController::class)->name('favourites.')->group(function (){
-Route::get('/' , 'index')->name('index') ;
-    Route::post('store' , 'store')->name('store') ;
-    Route::delete('delete/{favoris}' , 'delete')->name('delete') ;
+Route::middleware(['auth:sanctum'])->prefix('/favourites')->group(function (){
+Route::get('/' ,[FavouriteController::class , 'index']) ;
+    Route::post('store/{article}',  [FavouriteController::class , 'store']);
+    Route::delete('delete/{article}' ,  [FavouriteController::class , 'destroy']) ;
     //Route::put('update/{localisation}' , 'update')->name('localisations.update') ;
 }) ;
 

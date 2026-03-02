@@ -66,7 +66,7 @@ class UserController extends Controller
     $user = new User();
     $user->name = $request->name ;
     $user->email = $request->email ;
-    $user->role_id = 1;
+    $user->role_id = $request->role_id ?? 1;
     $user->password = $request->password ;
 //dd($user);
     try {

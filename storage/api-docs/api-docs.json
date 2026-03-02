@@ -201,12 +201,524 @@
                     }
                 ]
             }
+        },
+        "/api/favourites": {
+            "get": {
+                "tags": [
+                    "Favoris"
+                ],
+                "summary": "les favories d'un utilisateur.",
+                "description": "les favories d'un utilisateur. Token requis !",
+                "operationId": "6ac1698e69cc0429169aeb8417cc5df1",
+                "responses": {
+                    "200": {
+                        "description": "Récupération effectuée",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "favourites": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "product_id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "isFavourite": {
+                                                        "type": "integer",
+                                                        "example": 12
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Non authentifié !",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Non authentifié"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Favoris"
+                ],
+                "summary": "Retirer un élément des favoris",
+                "description": "Rétirer un élément des favoris . Token requis !",
+                "operationId": "5bcf39a04d61c7852e423e802058662b",
+                "parameters": [
+                    {
+                        "name": "article",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Article rétiré des favoris.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Article rétiré des favoris"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Favoris introuvable",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Favoris introuvable"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": {
+                    "sanctum": {}
+                }
+            }
+        },
+        "/api/favourites/store": {
+            "post": {
+                "tags": [
+                    "Favoris"
+                ],
+                "description": "Mettre en favoris",
+                "operationId": "16a023c1107c6a63a37494aa88cd330d",
+                "parameters": [
+                    {
+                        "name": "article",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Article rétiré des favoris",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Article rétiré des favoris"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": {
+                    "sanctum": {}
+                }
+            }
+        },
+        "/api/products": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "description": "Récupération des produits",
+                "operationId": "1bfaa78d1c2c3848ab8165c5dadcad3e",
+                "responses": {
+                    "200": {
+                        "description": "Liste de produits récuprée avec succès!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "nom": {
+                                                        "type": "string",
+                                                        "example": "Montre Electronique"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "Haute qualité. Peut durer jusqu'à 4h"
+                                                    },
+                                                    "stock": {
+                                                        "type": "integer",
+                                                        "example": 13
+                                                    },
+                                                    "prix_unitaire": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": 1000
+                                                    },
+                                                    "prix_promo": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": 800
+                                                    },
+                                                    "image": {
+                                                        "type": "string",
+                                                        "example": "image.png"
+                                                    },
+                                                    "vedette": {
+                                                        "type": "integer",
+                                                        "example": 0
+                                                    },
+                                                    "category_name": {
+                                                        "type": "string",
+                                                        "example": "Informatique"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/products/vedette": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "description": "Produits en vedette",
+                "operationId": "bf8ce98b2ef76588bdee5ea786e86177",
+                "responses": {
+                    "200": {
+                        "description": "Liste de produits en vedette récuprée avec succès!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "nom": {
+                                                        "type": "string",
+                                                        "example": "Montre Electronique"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "Haute qualité. Peut durer jusqu'à 4h"
+                                                    },
+                                                    "stock": {
+                                                        "type": "integer",
+                                                        "example": 13
+                                                    },
+                                                    "prix_unitaire": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": 1000
+                                                    },
+                                                    "prix_promo": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": 800
+                                                    },
+                                                    "image": {
+                                                        "type": "string",
+                                                        "example": "image.png"
+                                                    },
+                                                    "vedette": {
+                                                        "type": "integer",
+                                                        "example": 0
+                                                    },
+                                                    "category_name": {
+                                                        "type": "string",
+                                                        "example": "Informatique"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/products/nouveau": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "description": "Produits nouveaux",
+                "operationId": "84e60fff8bb9bc4e3355dd86018141d8",
+                "responses": {
+                    "200": {
+                        "description": "Liste de produits des nouveaux produits récuprée avec succès!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "nom": {
+                                                        "type": "string",
+                                                        "example": "Montre Electronique"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "Haute qualité. Peut durer jusqu'à 4h"
+                                                    },
+                                                    "stock": {
+                                                        "type": "integer",
+                                                        "example": 13
+                                                    },
+                                                    "prix_unitaire": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": 1000
+                                                    },
+                                                    "prix_promo": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": 800
+                                                    },
+                                                    "image": {
+                                                        "type": "string",
+                                                        "example": "image.png"
+                                                    },
+                                                    "vedette": {
+                                                        "type": "integer",
+                                                        "example": 0
+                                                    },
+                                                    "category_name": {
+                                                        "type": "string",
+                                                        "example": "Informatique"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/products/store": {
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "description": "Création de nouveau produit",
+                "operationId": "90841008e6d2f8cb3655547d2377fb01",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "category_id",
+                                    "nom",
+                                    "description",
+                                    "stock",
+                                    "prix_unitaire",
+                                    "image"
+                                ],
+                                "properties": {
+                                    "category_id": {
+                                        "description": "Doit être une catégorie existante !",
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "nom": {
+                                        "type": "string",
+                                        "example": "PC"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "PC authentique"
+                                    },
+                                    "stock": {
+                                        "type": "integer",
+                                        "example": 20
+                                    },
+                                    "prix_unitaire": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 100000
+                                    },
+                                    "prix_promo": {
+                                        "description": "Optionnel",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 90000
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "format": "binary",
+                                        "example": "url/vers/image"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Création effectuée",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "category_id": {
+                                                "description": "Doit être une catégorie existante !",
+                                                "type": "integer",
+                                                "example": "Informatique"
+                                            },
+                                            "nom": {
+                                                "type": "string",
+                                                "example": "PC"
+                                            },
+                                            "description": {
+                                                "type": "string",
+                                                "example": "PC authentique"
+                                            },
+                                            "stock": {
+                                                "type": "integer",
+                                                "example": 20
+                                            },
+                                            "prix_unitaire": {
+                                                "type": "number",
+                                                "format": "float",
+                                                "example": 100000
+                                            },
+                                            "prix_promo": {
+                                                "description": "Optionnel",
+                                                "type": "number",
+                                                "format": "float",
+                                                "example": 90000
+                                            },
+                                            "image": {
+                                                "type": "string",
+                                                "example": "url/vers/image"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Non authentifé !",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Action impossible ! Vous n'êtes pas un Administrateur."
+                                        }
+                                    },
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "sanctum": {
+                "type": "http",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
         }
     },
     "tags": [
         {
             "name": "Catégories",
             "description": "Gestion des catégories"
+        },
+        {
+            "name": "Favoris",
+            "description": "Toutes les routes pour les favoris ici"
+        },
+        {
+            "name": "Products",
+            "description": "Gestionn des produits"
         }
     ]
 }

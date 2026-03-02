@@ -28,7 +28,7 @@ class productRequest extends FormRequest
         'description'=>'nullable' ,
         'stock'=>'required|integer|min:10',
         'prix_unitaire'=>'required|numeric' ,
-        'prix_promo'=>'required|numeric' ,
+        'prix_promo'=>'nullable|numeric' ,
         'image'=>'required' ,
         ];
     }
@@ -44,9 +44,10 @@ class productRequest extends FormRequest
             'stock.min' =>"la quantité disponible qoit être supérieur  ou égale à 10" , 
             'prix_unitaire.required'=>"requis" ,
             'prix_unitaire.numeric'=>"numeric" ,
-            'prix_promo.required'=>"requis" ,
+            //'prix_promo.required'=>"requis" ,
             'prix_promo.numeric'=>"numeric" ,
             'image.required'=>"requis" ,
             ] ;
     }
+
 }

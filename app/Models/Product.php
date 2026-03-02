@@ -24,7 +24,7 @@ class Product extends Model
 
     //Contrainte vers la table categories
     public function category () {
-        return $this->belongsTo(Category::class) ;
+        return $this->belongsTo(Category::class, "category_id") ;
     }
 
     //Contrainte vers la table sales

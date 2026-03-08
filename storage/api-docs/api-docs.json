@@ -363,11 +363,11 @@
                 "tags": [
                     "Products"
                 ],
-                "description": "Récupération des produits",
+                "summary": "Liste de tous les produits",
                 "operationId": "1bfaa78d1c2c3848ab8165c5dadcad3e",
                 "responses": {
                     "200": {
-                        "description": "Liste de produits récuprée avec succès!",
+                        "description": "Liste de produits récupérée avec succès",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -375,47 +375,7 @@
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "integer",
-                                                        "example": 1
-                                                    },
-                                                    "nom": {
-                                                        "type": "string",
-                                                        "example": "Montre Electronique"
-                                                    },
-                                                    "description": {
-                                                        "type": "string",
-                                                        "example": "Haute qualité. Peut durer jusqu'à 4h"
-                                                    },
-                                                    "stock": {
-                                                        "type": "integer",
-                                                        "example": 13
-                                                    },
-                                                    "prix_unitaire": {
-                                                        "type": "number",
-                                                        "format": "float",
-                                                        "example": 1000
-                                                    },
-                                                    "prix_promo": {
-                                                        "type": "number",
-                                                        "format": "float",
-                                                        "example": 800
-                                                    },
-                                                    "image": {
-                                                        "type": "string",
-                                                        "example": "image.png"
-                                                    },
-                                                    "vedette": {
-                                                        "type": "integer",
-                                                        "example": 0
-                                                    },
-                                                    "category_name": {
-                                                        "type": "string",
-                                                        "example": "Informatique"
-                                                    }
-                                                },
-                                                "type": "object"
+                                                "$ref": "#/components/schemas/Product"
                                             }
                                         }
                                     },
@@ -432,11 +392,11 @@
                 "tags": [
                     "Products"
                 ],
-                "description": "Produits en vedette",
+                "summary": "Produits en vedette",
                 "operationId": "bf8ce98b2ef76588bdee5ea786e86177",
                 "responses": {
                     "200": {
-                        "description": "Liste de produits en vedette récuprée avec succès!",
+                        "description": "Liste des produits en vedette récupérée",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -444,116 +404,7 @@
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "integer",
-                                                        "example": 1
-                                                    },
-                                                    "nom": {
-                                                        "type": "string",
-                                                        "example": "Montre Electronique"
-                                                    },
-                                                    "description": {
-                                                        "type": "string",
-                                                        "example": "Haute qualité. Peut durer jusqu'à 4h"
-                                                    },
-                                                    "stock": {
-                                                        "type": "integer",
-                                                        "example": 13
-                                                    },
-                                                    "prix_unitaire": {
-                                                        "type": "number",
-                                                        "format": "float",
-                                                        "example": 1000
-                                                    },
-                                                    "prix_promo": {
-                                                        "type": "number",
-                                                        "format": "float",
-                                                        "example": 800
-                                                    },
-                                                    "image": {
-                                                        "type": "string",
-                                                        "example": "image.png"
-                                                    },
-                                                    "vedette": {
-                                                        "type": "integer",
-                                                        "example": 0
-                                                    },
-                                                    "category_name": {
-                                                        "type": "string",
-                                                        "example": "Informatique"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            }
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/products/nouveau": {
-            "get": {
-                "tags": [
-                    "Products"
-                ],
-                "description": "Produits nouveaux",
-                "operationId": "84e60fff8bb9bc4e3355dd86018141d8",
-                "responses": {
-                    "200": {
-                        "description": "Liste de produits des nouveaux produits récuprée avec succès!",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "integer",
-                                                        "example": 1
-                                                    },
-                                                    "nom": {
-                                                        "type": "string",
-                                                        "example": "Montre Electronique"
-                                                    },
-                                                    "description": {
-                                                        "type": "string",
-                                                        "example": "Haute qualité. Peut durer jusqu'à 4h"
-                                                    },
-                                                    "stock": {
-                                                        "type": "integer",
-                                                        "example": 13
-                                                    },
-                                                    "prix_unitaire": {
-                                                        "type": "number",
-                                                        "format": "float",
-                                                        "example": 1000
-                                                    },
-                                                    "prix_promo": {
-                                                        "type": "number",
-                                                        "format": "float",
-                                                        "example": 800
-                                                    },
-                                                    "image": {
-                                                        "type": "string",
-                                                        "example": "image.png"
-                                                    },
-                                                    "vedette": {
-                                                        "type": "integer",
-                                                        "example": 0
-                                                    },
-                                                    "category_name": {
-                                                        "type": "string",
-                                                        "example": "Informatique"
-                                                    }
-                                                },
-                                                "type": "object"
+                                                "$ref": "#/components/schemas/Product"
                                             }
                                         }
                                     },
@@ -570,7 +421,7 @@
                 "tags": [
                     "Products"
                 ],
-                "description": "Création de nouveau produit",
+                "summary": "Créer un produit",
                 "operationId": "90841008e6d2f8cb3655547d2377fb01",
                 "requestBody": {
                     "required": true,
@@ -587,7 +438,6 @@
                                 ],
                                 "properties": {
                                     "category_id": {
-                                        "description": "Doit être une catégorie existante !",
                                         "type": "integer",
                                         "example": 1
                                     },
@@ -609,15 +459,13 @@
                                         "example": 100000
                                     },
                                     "prix_promo": {
-                                        "description": "Optionnel",
                                         "type": "number",
                                         "format": "float",
                                         "example": 90000
                                     },
                                     "image": {
                                         "type": "string",
-                                        "format": "binary",
-                                        "example": "url/vers/image"
+                                        "format": "binary"
                                     }
                                 },
                                 "type": "object"
@@ -627,44 +475,152 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Création effectuée",
+                        "description": "Produit créé avec succès"
+                    },
+                    "401": {
+                        "description": "Non authentifié"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/products/update/{product}": {
+            "put": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Modifier un produit",
+                "operationId": "40426ac61ca1ce2d315838f9b9163ec9",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "category_id",
+                                    "nom",
+                                    "description",
+                                    "stock",
+                                    "prix_unitaire"
+                                ],
+                                "properties": {
+                                    "category_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "nom": {
+                                        "type": "string",
+                                        "example": "PC"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "PC authentique"
+                                    },
+                                    "stock": {
+                                        "type": "integer",
+                                        "example": 20
+                                    },
+                                    "prix_unitaire": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 100000
+                                    },
+                                    "prix_promo": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 90000
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Produit modifié avec succès"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/products/destroy/{product}": {
+            "delete": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Supprimer un produit",
+                "operationId": "4fc70012f13b672706315f4f12c1222f",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Produit supprimé avec succès"
+                    },
+                    "401": {
+                        "description": "Non autorisé"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/roles": {
+            "get": {
+                "tags": [
+                    "Roles"
+                ],
+                "description": "Récupérer tous les rôles",
+                "operationId": "77e3636d8592997ce9d6d27b50857a69",
+                "responses": {
+                    "200": {
+                        "description": "Liste des rôles récupérée avec succès",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "type": "array",
                                     "items": {
                                         "properties": {
-                                            "category_id": {
-                                                "description": "Doit être une catégorie existante !",
+                                            "id": {
                                                 "type": "integer",
-                                                "example": "Informatique"
+                                                "example": 1
                                             },
                                             "nom": {
                                                 "type": "string",
-                                                "example": "PC"
-                                            },
-                                            "description": {
-                                                "type": "string",
-                                                "example": "PC authentique"
-                                            },
-                                            "stock": {
-                                                "type": "integer",
-                                                "example": 20
-                                            },
-                                            "prix_unitaire": {
-                                                "type": "number",
-                                                "format": "float",
-                                                "example": 100000
-                                            },
-                                            "prix_promo": {
-                                                "description": "Optionnel",
-                                                "type": "number",
-                                                "format": "float",
-                                                "example": 90000
-                                            },
-                                            "image": {
-                                                "type": "string",
-                                                "example": "url/vers/image"
+                                                "example": "Admin"
                                             }
                                         },
                                         "type": "object"
@@ -672,19 +628,512 @@
                                 }
                             }
                         }
+                    }
+                }
+            }
+        },
+        "/api/roles/show/{id}": {
+            "get": {
+                "tags": [
+                    "Roles"
+                ],
+                "description": "Récupérer un rôle par son ID",
+                "operationId": "d8bfeea18fb66a5774cf5bfb0ed53b6a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Rôle récupéré avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "nom": {
+                                            "type": "string",
+                                            "example": "Admin"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Rôle non trouvé"
+                    }
+                }
+            }
+        },
+        "/api/roles/store": {
+            "post": {
+                "tags": [
+                    "Roles"
+                ],
+                "description": "Créer un rôle",
+                "operationId": "c7ec70b3cfebab546f13a2fa82074abe",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nom"
+                                ],
+                                "properties": {
+                                    "nom": {
+                                        "type": "string",
+                                        "example": "Admin"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Rôle créé avec succès"
+                    },
+                    "422": {
+                        "description": "Nom déjà existant"
+                    },
+                    "500": {
+                        "description": "Erreur interne serveur"
+                    }
+                }
+            }
+        },
+        "/api/roles/update/{id}": {
+            "put": {
+                "tags": [
+                    "Roles"
+                ],
+                "description": "Mettre à jour un rôle",
+                "operationId": "c5169b1a63d1fe8ce0225d77df06fe05",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nom"
+                                ],
+                                "properties": {
+                                    "nom": {
+                                        "type": "string",
+                                        "example": "Super Admin"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Mise à jour réussie"
+                    },
+                    "404": {
+                        "description": "Rôle non trouvé"
+                    },
+                    "422": {
+                        "description": "Nom déjà existant"
+                    }
+                }
+            }
+        },
+        "/api/roles/destroy/{id}": {
+            "delete": {
+                "tags": [
+                    "Roles"
+                ],
+                "description": "Supprimer un rôle (uniquement si aucun utilisateur lié)",
+                "operationId": "a665f671c3d924b32d70dd217d9ab55f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Rôle supprimé"
+                    },
+                    "400": {
+                        "description": "Impossible de supprimer le rôle, des utilisateurs y sont liés"
+                    },
+                    "404": {
+                        "description": "Rôle non trouvé"
+                    }
+                }
+            }
+        },
+        "/api/sales": {
+            "get": {
+                "tags": [
+                    "Sales"
+                ],
+                "description": "Récupérer toutes les ventes de l'utilisateur connecté",
+                "operationId": "419ebb078c83262b05f7c639ae8b2c21",
+                "responses": {
+                    "200": {
+                        "description": "Liste des ventes récupérée"
+                    },
+                    "204": {
+                        "description": "Aucune commande enregistrée"
+                    },
+                    "500": {
+                        "description": "Erreur serveur"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/sales/annullee": {
+            "get": {
+                "tags": [
+                    "Sales"
+                ],
+                "description": "Récupérer les ventes annulées",
+                "operationId": "f4b41e3fd84e3b305453f3ffbe68fbc5",
+                "responses": {
+                    "200": {
+                        "description": "Liste des ventes annulées récupérée"
+                    },
+                    "201": {
+                        "description": "Aucune commande annulée"
+                    },
+                    "500": {
+                        "description": "Erreur serveur"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/sales/expediee": {
+            "get": {
+                "tags": [
+                    "Sales"
+                ],
+                "description": "Récupérer les ventes expédiées",
+                "operationId": "6ceaf27fedfeba87ec3157fdfa53b00a",
+                "responses": {
+                    "200": {
+                        "description": "Liste des ventes expédiées récupérée"
+                    },
+                    "204": {
+                        "description": "Aucune commande expédiée"
+                    },
+                    "500": {
+                        "description": "Erreur serveur"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/sales/en_cours": {
+            "get": {
+                "tags": [
+                    "Sales"
+                ],
+                "description": "Récupérer les ventes en cours",
+                "operationId": "c7d423b99f0558f012684047a3b6a595",
+                "responses": {
+                    "200": {
+                        "description": "Liste des ventes en cours récupérée"
+                    },
+                    "204": {
+                        "description": "Aucune commande en cours"
+                    },
+                    "500": {
+                        "description": "Erreur serveur"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/sales/store": {
+            "post": {
+                "tags": [
+                    "Sales"
+                ],
+                "description": "Créer une nouvelle vente et décrémenter le stock des produits",
+                "operationId": "d86adba5204a6d4d8d3a43afdceae00a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "products"
+                                ],
+                                "properties": {
+                                    "products": {
+                                        "type": "array",
+                                        "items": {
+                                            "required": [
+                                                "product_id",
+                                                "quantity"
+                                            ],
+                                            "properties": {
+                                                "product_id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "quantity": {
+                                                    "type": "integer",
+                                                    "example": 2
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Commande créée avec succès"
+                    },
+                    "404": {
+                        "description": "Produit introuvable"
+                    },
+                    "500": {
+                        "description": "Erreur serveur"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/user/login": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Connexion d'un utilisateur",
+                "operationId": "9f6f4aca790a5229fb638e798623c6e0",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "user@mail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Connexion réussie",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "user": {
+                                            "type": "object"
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     },
                     "401": {
-                        "description": "Non authentifé !",
+                        "description": "Identifiants invalides"
+                    },
+                    "403": {
+                        "description": "Accès interdit"
+                    }
+                }
+            }
+        },
+        "/api/user/register": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Création d'un utilisateur",
+                "operationId": "d03ee3a44bdd6f0025efd14c5c76b5ae",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "user@mail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password123"
+                                    },
+                                    "role_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Utilisateur créé",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "message": {
-                                            "type": "string",
-                                            "example": "Action impossible ! Vous n'êtes pas un Administrateur."
+                                            "type": "string"
+                                        },
+                                        "user": {
+                                            "type": "object"
+                                        },
+                                        "token": {
+                                            "type": "string"
                                         }
                                     },
-                                    "type": "string"
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erreur serveur"
+                    }
+                }
+            }
+        },
+        "/api/user/profile": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Récupération du profil utilisateur",
+                "operationId": "a89d41894c20f774de86b3c94ba2fd77",
+                "responses": {
+                    "200": {
+                        "description": "Profil récupéré",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "user": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Non authentifié"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/user/logout": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Déconnexion utilisateur",
+                "operationId": "d52b7004aad9cc11ac927b616ad9c1f2",
+                "responses": {
+                    "200": {
+                        "description": "Déconnecté avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }
@@ -696,9 +1145,123 @@
                     }
                 ]
             }
+        },
+        "/api/profile/update": {
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Mise à jour du profil utilisateur",
+                "operationId": "387f1ae8706abbde3a5787870a7ff751",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "user@mail.com"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Profil mis à jour",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "user": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erreur serveur"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
         }
     },
     "components": {
+        "schemas": {
+            "Product": {
+                "title": "Product",
+                "required": [
+                    "nom",
+                    "category_id",
+                    "description",
+                    "stock",
+                    "prix_unitaire"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "nom": {
+                        "type": "string",
+                        "example": "Montre Electronique"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Haute qualité. Peut durer jusqu'à 4h"
+                    },
+                    "stock": {
+                        "type": "integer",
+                        "example": 13
+                    },
+                    "prix_unitaire": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 1000
+                    },
+                    "prix_promo": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 800
+                    },
+                    "image": {
+                        "type": "string",
+                        "example": "image.png"
+                    },
+                    "vedette": {
+                        "type": "integer",
+                        "example": 0
+                    },
+                    "category_name": {
+                        "type": "string",
+                        "example": "Informatique"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "securitySchemes": {
             "sanctum": {
                 "type": "http",
@@ -718,7 +1281,19 @@
         },
         {
             "name": "Products",
-            "description": "Gestionn des produits"
+            "description": "Gestion des produits"
+        },
+        {
+            "name": "Roles",
+            "description": "Gestion des rôles"
+        },
+        {
+            "name": "Sales",
+            "description": "Gestion des ventes et commandes"
+        },
+        {
+            "name": "Users",
+            "description": "Gestion des utilisateurs"
         }
     ]
 }

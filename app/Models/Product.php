@@ -19,6 +19,7 @@ class Product extends Model
         'stock' ,
         'prix_unitaire' ,
         'prix_promo' ,
+        'vedette' , // 1 ou 0 
         'image' ,
     ] ;
 

@@ -22,15 +22,23 @@ class productRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+
+        $rules = [
         'nom'=>'required' ,
         'category_id'=>'required|exists:categories,id',//|exists:categories,id' ,
         'description'=>'nullable' ,
         'stock'=>'required|integer|min:10',
         'prix_unitaire'=>'required|numeric' ,
         'prix_promo'=>'nullable|numeric' ,
-        'image'=>'required' ,
+        'image|mimes:jpg,jpeg,png|max:2048'
         ];
+
+        //Si la methode est update , le champ image n'est pas required
+        if ($this->isMethod('post')){
+            $rules['image'] =  'required|image|mimes:jpg,jpeg,png|max:2048' ;
+        }
+
+        return $rules ;
     }
 
     public function messages()

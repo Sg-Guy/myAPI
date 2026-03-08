@@ -3,6 +3,7 @@
 use App\Http\Controllers\AController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\FavouriteController;
 use App\Http\Controllers\LocalisationController;
 use App\Http\Controllers\ProductController;
@@ -13,20 +14,20 @@ use App\Http\Controllers\UserController;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-Route::get ('/welcome' , function (){
-    return 'Welcome' ;
-} ) ;
-Route::prefix('/user')->controller(UserController::class)->group(function (){
+
+Route::prefix('/user')->group(function (){
     Route::get('/', function (Request $request) {
         return response()->json(['user'=>$request->user()] , 200);
     })->middleware('auth:sanctum');
 
-    Route::post('/login', 'login')->name('routes.login') ;
-    Route::post('register', 'register')->name('routes.register') ;
-    Route::post('/logout', 'logout')->name('routes.logout')->middleware('auth:sanctum');
-    Route::get('/profil', 'profil')->name('routes.profil')->middleware('auth:sanctum');
-    Route::put('/update', 'update')->name('routes.update')->middleware('auth:sanctum') ;
+    Route::post('/login', [UserController::class,'login']) ;
+    Route::post('/register', [UserController::class ,'register']) ;
+    Route::post('/logout', [UserController::class,'logout'])->middleware('auth:sanctum');
+    Route::get('/profile',[UserController::class, 'profile'])->middleware('auth:sanctum');
+    Route::put('/update', [UserController::class,'update'])->middleware('auth:sanctum') ;
 }) ;
+
+Route::get("/dashboard" , [DashBoardController::class , 'dashboard'])->middleware(['auth:sanctum' , 'role:Admin']) ;
 
 
 
@@ -37,27 +38,32 @@ Route::apiResource('categories' , CategoryController::class) ;
 
 
 Route::prefix('/products')->group(function (){
+    Route::get('/admin' , [ProductController::class, "forAdmin"])->middleware(["auth:sanctum" , "role:Admin"]);
     Route::get('/' , [ProductController::class, "index"]);
-    Route::post('store' , [ProductController::class , "store"])->middleware(["auth:sanctum"]);
+    Route::post('store' , [ProductController::class , "store"])->middleware(["auth:sanctum" , 'role:Admin']);
     Route::get('vedette' , [ProductController::class , "vedette"]);
     Route::get('nouveau' , [ProductController::class , "nouveau"]);
-    Route::put('update/{product}' , [ProductController::class , "update"])->middleware(["auth:sanctum"]) ;
-    Route::delete('destroy/{product}' , [ProductController::class ,"destroy"])->middleware(["auth:sanctum"]) ;
+    Route::put('update/{product}' , [ProductController::class , "update"])->middleware(["auth:sanctum", 'role:Admin']) ;
+    Route::delete('destroy/{product}' , [ProductController::class ,"destroy"])->middleware(["auth:sanctum", 'role:Admin']) ;
+    Route::get('details/admin/{product}' , [ProductController::class ,"detailForAdmin"]) ; //->middleware(["auth:sanctum"]) ;
+
 }) ;
 
-Route::prefix('/sales')->controller(SaleController::class)->group(function (){
-    Route::get('/' , 'index')->name('sales.index')->middleware('auth:sanctum') ;
-    Route::post('store' , 'store')->name('sales.store')->middleware('auth:sanctum') ;
-    Route::get('en_cours' , 'en_cours')->name('sales.en_cours')->middleware('auth:sanctum') ;
-    Route::get('annullee' , 'annullee')->name('sales.annullee')->middleware('auth:sanctum') ;
-    Route::get('expediee' , 'expediee')->name('sales.expediee')->middleware('auth:sanctum') ;
-    Route::put('update/{sale}' , 'update')->name('sales.update') ;
+Route::prefix('/sales')->group(function (){
+    Route::get('/' , [SaleController::class ,'index'])->middleware('auth:sanctum') ;
+    Route::post('store' ,[SaleController::class, 'store'])->middleware('auth:sanctum') ;
+    Route::get('en_cours' , [SaleController::class,'en_cours'])->middleware('auth:sanctum') ;
+    Route::get('annullee' , [SaleController::class ,'annullee'])->middleware('auth:sanctum') ;
+    Route::get('expediee' , [SaleController::class ,'expediee'])->middleware('auth:sanctum') ;
+    Route::put('update/{sale}' , [SaleController::class,'update']) ;
 }) ;
 
-Route::prefix('/roles')->controller(RoleController::class)->group(function (){
-    Route::get('/' , 'index')->name('index') ;
-    Route::post('store' , 'store')->name('roles.store') ;
-    Route::put('update/{role}' , 'update')->name('roles.update') ;
+Route::/*middleware(["auth:sanctum" , 'role:Admin'])->*/prefix('/roles')->group(function (){
+Route::get('/' , [RoleController::class ,'index']) ;
+    Route::post('store' , [RoleController::class ,'store']) ;
+    Route::put('update/{id}' , [RoleController::class ,'update']) ;
+    Route::put('destroy/{id}' , [RoleController::class ,'destroy']) ;
+    Route::get('show/{id}' , [RoleController::class ,'show']) ;
 }) ;
 
 Route::prefix('/localisations')->controller(LocalisationController::class)->group(function (){

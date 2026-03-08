@@ -113,8 +113,8 @@ class CategoryController extends Controller
     )]
     public function index()
     {
-        $categories = Category::select('id', 'name')->get();
-
+        $categories = Category::with('product')->select('id', 'name' , 'description')->get();
+        
         return response()->json([
             'message' => "Requête traitée avec succès",
             'data' => $categories

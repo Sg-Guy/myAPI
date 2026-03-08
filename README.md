@@ -1,8 +1,8 @@
- myAPI
+ -myAPI : 
     API pour la gestion d’une plateforme e-commerce. Permet la gestion des utilisateurs, des produits, des rôles et des ventes.
 
-Table des matières
-    Installation
+-Table des matières:
+    Installation\n
     Configuration
     Authentification
     Endpoints

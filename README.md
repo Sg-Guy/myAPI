@@ -24,26 +24,26 @@ API pour la gestion d’une plateforme e-commerce. Permet la gestion des utilisa
 ```bash
 git clone https://github.com/Sg-Guy/myAPI
 Installer les dépendances :
-Bash
-Copier le code
+
+
 composer install
 Copier le fichier d’environnement et générer la clé :
-Bash
-Copier le code
+
+
 cp .env.example .env
 php artisan key:generate
 Migrer la base de données :
-Bash
-Copier le code
+
+
 php artisan migrate
 Lancer le serveur de développement :
-Bash
-Copier le code
+
+
 php artisan serve
 Configuration
 Configurer la base de données dans .env :
 Environment
-Copier le code
+
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
@@ -85,12 +85,12 @@ Le projet utilise OpenAPI / Swagger pour documenter tous les endpoints.
 Tous les contrôleurs sont annotés avec #[OA...] pour générer automatiquement la documentation.
 Génération et visualisation
 Installer le package Swagger PHP si ce n’est pas déjà fait :
-Bash
-Copier le code
+
+
 composer require zircote/swagger-php
 Générer le fichier JSON de documentation :
-Bash
-Copier le code
+
+
 php artisan swagger-lume:generate
 Visualiser la documentation dans le navigateur :
 http://localhost:8000/api/documentation⁠�

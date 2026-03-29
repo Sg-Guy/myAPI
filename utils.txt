@@ -1,0 +1,76 @@
+===========================================================================
+DOCUMENTATION TECHNIQUE : ENVOI DE NOTIFICATIONS VIA QUEUES 
+===========================================================================
+
+1. DESCRIPTION DU FLUX
+----------------------
+L'objectif est d'envoyer un email à l'administrateur à chaque commande sans
+ralentir la réponse de l'API. On utilise pour cela les "Queues" (files d'attente)
+avec le driver "database".
+
+2. ÉTAPE 1 : CRÉATION DE LA NOTIFICATION
+----------------------------------------
+Commande Artisan :
+php artisan make:notification NewOrderNotification
+
+Dans le fichier 'app/Notifications/NewOrderNotification.php' :
+- Ajouter : implements ShouldQueue
+- Utiliser : use Queueable;
+
+Extrait du code (Méthode toMail) :
+----------------------------------
+public function toMail($notifiable): MailMessage 
+{
+    $mail = (new MailMessage)
+        ->subject('Nouvelle commande reçue ! - Ref: ' . $this->order->reference)
+        ->greeting('Bonjour Administrateur,')
+        ->line('Une nouvelle commande a été enregistrée.')
+        ->line('**Référence :** ' . $this->order->reference)
+        ->line('**Montant :** ' . number_format($this->order->total, 0, ',', ' ') . ' F CFA')
+        ->line('---')
+        ->line('**Produits :**');
+
+    foreach ($this->order->products as $product) {
+        $mail->line("- {$product->nom} (Qté: {$product->pivot->quantity})");
+    }
+
+    return $mail
+        ->action('Gérer la commande', url('http://localhost:5173/admin/orders'))
+        ->salutation('Cordialement, ElectroShop');
+}
+
+3. ÉTAPE 2 : DÉCLENCHEMENT DANS LE CONTROLLER
+---------------------------------------------
+Dans 'OrderController.php', après la validation et le DB::commit() :
+
+// Import des façades
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\NewOrderNotification;
+
+// Charger les relations avant l'envoi
+$sale->load('products');
+
+// Envoi vers un mail fixe (Admin)
+Notification::route('mail', 'admin@electroshop.com')
+            ->notify(new NewOrderNotification($sale));
+
+4. ÉTAPE 3 : CONFIGURATION ENVIRONNEMENT (.env)
+-----------------------------------------------
+S'assurez que les variables suivantes sont définies :
+
+QUEUE_CONNECTION=database
+MAIL_MAILER=smtp
+MAIL_HOST=127.0.0.1
+MAIL_PORT=1025 (Pour MailHog)
+
+5. ÉTAPE 4 : LANCEMENT DU TRAITEMENT (TERMINAL)
+-----------------------------------------------
+Pour que les mails partent réellement de la table 'jobs' vers MailHog, 
+lancez cette commande dans un terminal dédié :
+
+php artisan queue:work --verbose
+
+
+===========================================================================
+FIN DU GUIDE
+===========================================================================

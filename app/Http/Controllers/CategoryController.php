@@ -79,7 +79,7 @@ class CategoryController extends Controller
         path: "/api/categories",
         summary: "Lister toutes les catégories",
         description: "Retourne toutes les catégories",
-        security: [["sanctum" => []]],
+        //security: [["sanctum" => []]],
         tags: ["Catégories"],
         responses: [
             new OA\Response(
@@ -113,13 +113,15 @@ class CategoryController extends Controller
     )]
     public function index()
     {
-        $categories = Category::with('product')->select('id', 'name' , 'description')->get();
+        $categories = Category::with('product')->select('id', 'name' , 'description' , 'created_at' , 'updated_at')->get();
         
         return response()->json([
             'message' => "Requête traitée avec succès",
             'data' => $categories
         ], 200);
     }
+
+ 
 
     #[OA\Put(
         path: "/api/categories/{category}",

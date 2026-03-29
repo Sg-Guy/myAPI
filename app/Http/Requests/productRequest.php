@@ -27,7 +27,7 @@ class productRequest extends FormRequest
         'nom'=>'required' ,
         'category_id'=>'required|exists:categories,id',//|exists:categories,id' ,
         'description'=>'nullable' ,
-        'stock'=>'required|integer|min:10',
+        'stock'=>'required|integer|min:5',
         'prix_unitaire'=>'required|numeric' ,
         'prix_promo'=>'nullable|numeric' ,
         'image|mimes:jpg,jpeg,png|max:2048'

@@ -13,7 +13,6 @@ return new class extends Migration
             // Référence unique sous forme de chaîne alphanumérique
             $table->string('reference')->unique();
 
-            // Exemple : si tu veux lier à un utilisateur (vendeur)
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
 
             // date

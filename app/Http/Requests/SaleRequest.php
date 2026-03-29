@@ -22,7 +22,6 @@ class SaleRequest extends FormRequest
     public function rules(): array
     {
          return [
-            'user_id' => 'required|exists:users,id',
             'products' => 'required|array|min:1', // Liste des produits
             'products.*.product_id' => 'required|exists:products,id',
             'products.*.quantity' => 'required|integer|min:1',
@@ -36,7 +35,6 @@ class SaleRequest extends FormRequest
             'products.*.product_id.exists' => 'Le produit sélectionné n’existe pas.',
             'products.*.quantity.min' => 'La quantité pour un produit doit être d’au moins 1.',
             'products.*.quantity.required' => 'La quantité d’un produit est obligatoire.',
-            'user_id.exists' => 'L’identifiant utilisateur fourni n’est pas valide.',
         ]; 
     }
 }

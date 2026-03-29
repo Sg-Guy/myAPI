@@ -598,6 +598,75 @@
                 ]
             }
         },
+        "/api/products/admin": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "description": "Récupération des produits",
+                "operationId": "a143782d021b3d2fcf88590efa4a279e",
+                "responses": {
+                    "200": {
+                        "description": "Liste de produits récuprée avec succès!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "nom": {
+                                                        "type": "string",
+                                                        "example": "Montre Electronique"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "Haute qualité. Peut durer jusqu'à 4h"
+                                                    },
+                                                    "stock": {
+                                                        "type": "integer",
+                                                        "example": 13
+                                                    },
+                                                    "prix_unitaire": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": 1000
+                                                    },
+                                                    "prix_promo": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": 800
+                                                    },
+                                                    "image": {
+                                                        "type": "string",
+                                                        "example": "image.png"
+                                                    },
+                                                    "vedette": {
+                                                        "type": "integer",
+                                                        "example": 0
+                                                    },
+                                                    "category_name": {
+                                                        "type": "string",
+                                                        "example": "Informatique"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/roles": {
             "get": {
                 "tags": [

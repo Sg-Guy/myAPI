@@ -14,7 +14,8 @@ class Sale extends Model
         'status' ,
         'total' ,
         'product_id' ,
-        'sale_id'
+        'sale_id',
+        'quantity'
     ] ;
 
    public function products()

@@ -40,22 +40,24 @@ Route::apiResource('categories' , CategoryController::class) ;
 Route::prefix('/products')->group(function (){
     Route::get('/admin' , [ProductController::class, "forAdmin"])->middleware(["auth:sanctum" , "role:Admin"]);
     Route::get('/' , [ProductController::class, "index"]);
-    Route::post('store' , [ProductController::class , "store"])->middleware(["auth:sanctum" , 'role:Admin']);
+    Route::post("store" , [ProductController::class , "store"])->middleware(["auth:sanctum" , 'role:Admin']);
     Route::get('vedette' , [ProductController::class , "vedette"]);
     Route::get('nouveau' , [ProductController::class , "nouveau"]);
     Route::put('update/{product}' , [ProductController::class , "update"])->middleware(["auth:sanctum", 'role:Admin']) ;
     Route::delete('destroy/{product}' , [ProductController::class ,"destroy"])->middleware(["auth:sanctum", 'role:Admin']) ;
+    
     Route::get('details/admin/{product}' , [ProductController::class ,"detailForAdmin"]) ; //->middleware(["auth:sanctum"]) ;
-
 }) ;
 
 Route::prefix('/sales')->group(function (){
     Route::get('/' , [SaleController::class ,'index'])->middleware('auth:sanctum') ;
-    Route::post('store' ,[SaleController::class, 'store'])->middleware('auth:sanctum') ;
+    Route::get('/all/admin' , [SaleController::class ,'forAdmin'])->middleware('auth:sanctum') ;
+    Route::middleware(['auth:sanctum'])->post('store' ,[SaleController::class, 'store']) ;
     Route::get('en_cours' , [SaleController::class,'en_cours'])->middleware('auth:sanctum') ;
     Route::get('annullee' , [SaleController::class ,'annullee'])->middleware('auth:sanctum') ;
     Route::get('expediee' , [SaleController::class ,'expediee'])->middleware('auth:sanctum') ;
-    Route::put('update/{sale}' , [SaleController::class,'update']) ;
+    Route::put('update/{reference}' , [SaleController::class,'update']) ;
+    Route::get('details/{reference}' , [SaleController::class,'OrderDetail']) ;
 }) ;
 
 Route::/*middleware(["auth:sanctum" , 'role:Admin'])->*/prefix('/roles')->group(function (){

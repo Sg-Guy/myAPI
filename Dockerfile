@@ -1,7 +1,19 @@
-# --- Étape 2 : Production (Image finale) ---
+# --- Étape 1 : On nomme cette étape "builder" ---
+FROM php:8.2-fpm-alpine AS builder
+
+RUN apk add --no-cache libpng-dev libxml2-dev zip unzip git curl icu-dev libzip-dev
+RUN docker-php-ext-install pdo_mysql bcmath gd intl zip
+
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+WORKDIR /var/www
+COPY . .
+
+RUN composer install --no-dev --optimize-autoloader --no-interaction
+
+# --- Étape 2 : Production ---
 FROM php:8.2-fpm-alpine
 
-# 1. Installation des dépendances système + dépendances de COMPILATION
 RUN apk add --no-cache \
     nginx \
     libpng \
@@ -13,14 +25,11 @@ RUN apk add --no-cache \
     zlib-dev \
     oniguruma-dev
 
-# 2. Installation des extensions PHP
 RUN docker-php-ext-install pdo_mysql bcmath gd intl zip
-
-# 3. Nettoyage des paquets "-dev" pour alléger l'image (optionnel mais recommandé)
 RUN apk del libpng-dev libxml2-dev icu-dev libzip-dev zlib-dev
 
-# --- Le reste demeure inchangé ---
-COPY --from=build /var/www /var/www
+# CORRECT : On utilise le nom "builder" défini à l'étape 1
+COPY --from=builder /var/www /var/www
 COPY ./docker/nginx.conf /etc/nginx/http.d/default.conf
 
 WORKDIR /var/www

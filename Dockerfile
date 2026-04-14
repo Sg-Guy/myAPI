@@ -11,21 +11,29 @@ COPY . .
 
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Étape 2 : Production (Image légère avec Nginx)
+# Étape 2 : Production
 FROM php:8.2-fpm-alpine
 
-RUN apk add --no-cache nginx libpng libxml2 icu libzip pdo_mysql
+# Installation des dépendances système nécessaires au runtime
+RUN apk add --no-cache nginx libpng libxml2 icu-libs libzip
 
-# Configuration PHP-FPM et Nginx
+# Installation des extensions PHP (pdo_mysql et autres)
+RUN docker-php-ext-install pdo_mysql bcmath gd intl zip
+
 COPY --from=build /var/www /var/www
 COPY ./docker/nginx.conf /etc/nginx/http.d/default.conf
 
 WORKDIR /var/www
 
-# Droits d'accès pour Laravel
-RUN chown -R www-data:www-data /var/www/storage /var/www/cache
+# Droits d'accès cruciaux pour Laravel
+RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
 EXPOSE 80
 
-# Script de démarrage
-CMD php artisan migrate --force && php artisan config:cache && php artisan storage:link && php artisan route:cache && php artisan view:cache && nginx && php-fpm
+# Script de démarrage : Cache + Storage Link + Migration + Services
+CMD php artisan storage:link && \
+    php artisan config:cache && \
+    php artisan route:cache && \
+    php artisan view:cache && \
+    php-fpm -D && \
+    nginx -g "daemon off;"

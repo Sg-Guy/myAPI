@@ -71,6 +71,13 @@ lancez cette commande dans un terminal dédié :
 php artisan queue:work --verbose
 
 
+
+
+INFO DE DEPLOIEMENT SUR RENDER
+##Créer un fichier Dockerfile à la racine du projet et y mettre exactement les informations comme dans ce projet
+## Créer un dossier docker puis un fichier nginx.conf à l'interieur de celui-ci. Ajouter à l'intérieur de de fichier le code comme dans ce projet
+## Pour s'assurer que le site fonctionne sur https::.. , accéder à ce fichier app\Providers\AppServiceProvider.php et y mettre le code comme dans ce projet
+## Si le projet n'est pas documenter sous swagger , eviter de mettre les commandes swagger dans le Dockerfile
 ===========================================================================
 FIN DU GUIDE
 ===========================================================================

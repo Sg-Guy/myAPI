@@ -21,7 +21,7 @@ use OpenApi\Attributes as OA;
 //Pour l'authentification
 #[OA\SecurityScheme(
     securityScheme: "sanctum",
-    type: "https",
+    type: "http",
     scheme: "bearer",
     bearerFormat: "JWT"
 )]

@@ -22,13 +22,12 @@ class NewUserNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject('🚀 Nouvelle inscription : ' . $this->user->name)
-            ->greeting('Bonjour Admin,')
-            ->line('Un nouvel utilisateur s\'est inscrit sur votre plateforme.')
-            ->line('**Nom :** ' . $this->user->name)
-            ->line('**Email :** ' . $this->user->email)
-            ->action('Voir l\'utilisateur', url('/admin/users')) // Optionnel
-            ->line('Félicitations !');
+        ->subject('🚀 Nouvelle inscription sur votre App')
+        ->greeting('Bonjour Admin,')
+        ->line('Un nouvel utilisateur vient de créer un compte.')
+        ->line('**Nom :** ' . $this->user->name)
+        ->line('**Email :** ' . $this->user->email)
+        ->action('Voir dans l\'admin', url('/admin/users'));
     }
 
 }

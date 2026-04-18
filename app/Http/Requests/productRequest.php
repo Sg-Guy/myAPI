@@ -30,7 +30,7 @@ class productRequest extends FormRequest
         'description'=>'nullable' ,
         'stock'=>'required|integer|min:10',
         'prix_unitaire'=>'required|numeric' ,
-        'prix_promo'=>'nullable|numeric' ,
+        'prix_promo'=>'nullable|numeric|lt:prix_unitaire' ,
         'image|mimes:jpg,jpeg,png|max:2048'
         ];
 
@@ -46,16 +46,28 @@ class productRequest extends FormRequest
     {
         return [
             'nom.required' =>"Nom du produit requis" , 
+
             'category_id.required' =>"Catégorie requise" , 
+
             'category_id.exists' =>"Catégorie inexistante" , 
+
             'stock.required' =>"Quantité requise requis" , 
+
             'stock.integer' =>"Vueilleez renseigner un nombre entier" , 
-            'stock.min' =>"la quantité disponible qoit être supérieur  ou égale à 10" , 
-            'prix_unitaire.required'=>"requis" ,
+
+            'stock.min' =>"la quantité disponible doit être supérieur  ou égale à 10" , 
+
+            'prix_unitaire.required'=>"Etrez le prix de vente du produit" ,
+
             'prix_unitaire.numeric'=>"numeric" ,
+
             //'prix_promo.required'=>"requis" ,
+
             'prix_promo.numeric'=>"numeric" ,
-            'image.required'=>"requis" ,
+
+            'prix_promo.lt'=>"Ce prix doit être inférieur au prix normal" ,
+
+            'image.required'=>"Veuillez choisir une image pour le produit" ,
             ] ;
     }
 

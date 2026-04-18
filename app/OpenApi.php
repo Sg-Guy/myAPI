@@ -14,7 +14,7 @@ use OpenApi\Attributes as OA;
 
 //Infos server
 #[OA\Server(
-    url:  "http://127.0.0.1:8000",
+    url:  "https://myapi-o37g.onrender.com",// "http://127.0.0.1:8000",
     description: "Serveur local"
 )]
 

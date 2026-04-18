@@ -151,7 +151,7 @@ class ProductController extends Controller
             $product->save();
             return response()->json(['message' => "Création effectuée", 'data' => $product], 200);
         } catch (Exception $e) {
-            return response()->json(['message' => "Erreur: " . $e], 400);
+            return response()->json(['message' => "Erreur: " . $e], 500);
         }
     }
 

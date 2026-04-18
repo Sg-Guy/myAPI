@@ -474,6 +474,9 @@
                     },
                     "401": {
                         "description": "Non authentifié"
+                    },
+                    "422": {
+                        "description": "Erreur de validation"
                     }
                 },
                 "security": [

@@ -40,7 +40,7 @@ Route::apiResource('categories' , CategoryController::class) ;
 Route::prefix('/products')->group(function (){
     Route::get('/admin' , [ProductController::class, "forAdmin"])->middleware(["auth:sanctum" , "role:Admin"]);
     Route::get('/' , [ProductController::class, "index"]);
-    Route::post("store" , [ProductController::class , "store"])->middleware(["auth:sanctum" , 'role:Admin']);
+    Route::post("/store" , [ProductController::class , "store"])->middleware(["auth:sanctum" , 'role:Admin']);
     Route::get('vedette' , [ProductController::class , "vedette"]);
     Route::get('nouveau' , [ProductController::class , "nouveau"]);
     Route::put('update/{product}' , [ProductController::class , "update"])->middleware(["auth:sanctum", 'role:Admin']) ;

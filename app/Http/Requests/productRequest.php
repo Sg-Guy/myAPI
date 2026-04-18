@@ -2,8 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Nette\Utils\Json;
+use Illuminate\Validation\ValidationException;
 
 class productRequest extends FormRequest
 {
@@ -27,7 +28,7 @@ class productRequest extends FormRequest
         'nom'=>'required' ,
         'category_id'=>'required|exists:categories,id',//|exists:categories,id' ,
         'description'=>'nullable' ,
-        'stock'=>'required|integer|min:5',
+        'stock'=>'required|integer|min:10',
         'prix_unitaire'=>'required|numeric' ,
         'prix_promo'=>'nullable|numeric' ,
         'image|mimes:jpg,jpeg,png|max:2048'
@@ -58,4 +59,14 @@ class productRequest extends FormRequest
             ] ;
     }
 
+
+    protected function failedValidation(Validator $validator)
+    {
+        $response = response()->json([
+            "message" => "Validatin échouée" , 
+            "errors" => $validator->errors() 
+        ] , 422);
+
+        throw new ValidationException($validator , $response) ;
+    }
 }

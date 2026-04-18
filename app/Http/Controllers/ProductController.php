@@ -126,7 +126,8 @@ class ProductController extends Controller
         ),
         responses: [
             new OA\Response(response: 200, description: "Produit créé avec succès"),
-            new OA\Response(response: 401, description: "Non authentifié")
+            new OA\Response(response: 401, description: "Non authentifié") ,
+            new OA\Response(response: 422, description: "Erreur de validation")
         ]
     )]
     public function store(ProductRequest $request)
@@ -137,9 +138,10 @@ class ProductController extends Controller
             'description',
             'stock',
             'prix_unitaire',
+            'image' ,
             'prix_promo',
             'vedette'
-        ]));
+            ]));
 
         if ($request->hasFile('image')) {
             $product->image = $request->file('image')->store('images', 'public');
